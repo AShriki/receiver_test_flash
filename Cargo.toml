@@ -1,0 +1,27 @@
+[package]
+authors = ["dev"]
+edition = "2018"
+readme = "README.md"
+name = "receiver_test_flash"
+version = "0.1.0"
+
+[dependencies]
+cortex-m = "0.7.4"
+cortex-m-rt = "0.7.1"
+defmt = "0.3.0"
+stm32-hal2 = { git = "https://github.com/David-OConnor/stm32-hal.git", features = ["l4x6", "l4rt", "embedded_hal"]}
+
+[[bin]]
+name = "receiver_test_flash"
+test = false
+bench = false
+
+[profile.release]
+debug = true # symbols are nice and they don't increase the size on Flash
+panic = "abort"
+lto = true # better optimizations
+opt-level = "z"
+
+[profile.dev]
+opt-level = "z"
+lto = true # better optimizations
